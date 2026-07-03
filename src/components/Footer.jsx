@@ -50,7 +50,7 @@ const Footer = () => {
                 <FaGithub size={18} />
               </a>
               <a
-                href="mailto:alihassan5025a@gmail.com"
+                href="mailto:alih.bsse@gmail.com"
                 className="w-10 h-10 bg-secondary border border-white/5 rounded-full flex items-center justify-center text-textMuted hover:bg-highlight hover:text-white hover:border-highlight transition-all duration-300 shadow-lg hover:shadow-highlight/25"
               >
                 <FaEnvelope size={16} />
@@ -111,12 +111,12 @@ const Footer = () => {
                   href="mailto:alihassan5025a@gmail.com"
                   className="hover:text-white transition-colors"
                 >
-                  alihassan5025a@gmail.com
+                  alih.bsse@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-green-500 mt-1">●</span>
-                <span>+92 3XX XXXXXXX</span>
+                <span>+92 337 4848230</span>
               </li>
             </ul>
           </div>

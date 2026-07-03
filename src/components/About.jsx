@@ -29,21 +29,22 @@ const About = () => {
   };
 
   return (
-    <section id="about" className="py-24 bg-primary relative overflow-hidden">
+    <section id="about" className="py-24 bg-transparent relative overflow-hidden">
       {/* Background Decorative Elements */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
       <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
 
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-5xl font-bold text-textMain mb-6">
-            About <span className="text-accent">Me</span>
+            About <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-highlight">Me</span>
           </h2>
           <p className="text-textMuted text-lg max-w-2xl mx-auto leading-relaxed">
             More than just code. I'm a problem solver, a creative thinker, and a lifelong learner.
@@ -54,16 +55,20 @@ const About = () => {
           {/* Navigation Tabs (Left Side on Desktop) */}
           <div className="w-full md:w-1/4">
             <div className="flex flex-row md:flex-col gap-4 overflow-x-auto md:overflow-visible pb-4 md:pb-0 scrollbar-hide">
-              {tabs.map((tab) => {
+              {tabs.map((tab, idx) => {
                 const Icon = tab.icon;
                 return (
-                  <button
+                  <motion.button
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.1, duration: 0.5 }}
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`flex items-center gap-4 px-6 py-4 rounded-xl transition-all duration-300 w-full text-left bg-secondary/30 border border-white/5 hover:bg-secondary/60 ${
+                    className={`flex items-center gap-4 px-6 py-4 rounded-xl transition-all duration-300 w-full text-left bg-secondary/50 backdrop-blur-md border border-white/5 hover:bg-white/5 ${
                       activeTab === tab.id
-                        ? "border-accent/50 bg-secondary/80 shadow-[0_0_20px_rgba(59,130,246,0.15)]"
-                        : "hover:border-white/10"
+                        ? "border-accent/50 bg-white/10 shadow-[0_0_20px_rgba(6,182,212,0.15)] scale-105"
+                        : "hover:border-white/20 hover:scale-105"
                     }`}
                   >
                     <Icon
@@ -79,14 +84,14 @@ const About = () => {
                     >
                       {tab.label}
                     </span>
-                  </button>
+                  </motion.button>
                 );
               })}
             </div>
           </div>
 
           {/* Content Area (Right Side) */}
-          <div className="w-full md:w-3/4 bg-secondary/20 p-8 rounded-2xl border border-white/5 min-h-[400px]">
+          <div className="w-full md:w-3/4 bg-secondary/30 backdrop-blur-xl p-8 rounded-2xl border border-white/10 shadow-2xl min-h-[400px]">
             <AnimatePresence mode="wait">
               {activeTab === "journey" && (
                 <motion.div
@@ -95,13 +100,13 @@ const About = () => {
                   initial="hidden"
                   animate="visible"
                   exit="exit"
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.4 }}
                   className="space-y-6"
                 >
                   <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
                     <User className="text-accent" /> My Journey
                   </h3>
-                  <div className="prose prose-invert max-w-none text-textMuted leading-loose">
+                  <div className="prose prose-invert max-w-none text-textMuted leading-loose text-lg">
                     <p>
                       My journey into tech wasn't just about learning syntax; it
                       was about understanding how to build systems that scale
@@ -135,52 +140,58 @@ const About = () => {
                   initial="hidden"
                   animate="visible"
                   exit="exit"
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.4 }}
                   className="space-y-6"
                 >
                   <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
                     <Award className="text-accent" /> Education & Certifications
                   </h3>
                   <div className="space-y-6">
-                    {EDUCATION.map((edu) => (
-                      <div
+                    {EDUCATION.map((edu, idx) => (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: idx * 0.1 }}
                         key={edu.id}
-                        className="bg-secondary/40 p-6 rounded-xl border border-white/5 hover:border-white/10 transition-colors"
+                        className="bg-white/5 backdrop-blur-md p-6 rounded-xl border border-white/10 hover:border-accent/50 transition-all duration-300 hover:shadow-[0_0_15px_rgba(6,182,212,0.1)] group"
                       >
                         <div className="flex justify-between items-start mb-2">
                           <div>
-                            <h4 className="text-xl font-bold text-white">
+                            <h4 className="text-xl font-bold text-white group-hover:text-accent transition-colors">
                               {edu.school}
                             </h4>
-                            <p className="text-accent font-medium">{edu.degree}</p>
+                            <p className="text-highlight font-medium">{edu.degree}</p>
                           </div>
-                          <span className="text-xs bg-white/5 px-3 py-1 rounded-full text-textMuted group-hover:bg-white/10 transition-colors">
+                          <span className="text-xs bg-white/10 px-3 py-1 rounded-full text-white group-hover:bg-accent/20 group-hover:text-accent transition-colors">
                             {edu.year}
                           </span>
                         </div>
                         <p className="text-textMuted text-sm mt-2">{edu.details}</p>
-                      </div>
+                      </motion.div>
                     ))}
                     
-                    <div className="pt-6 border-t border-white/5">
+                    <div className="pt-6 border-t border-white/10">
                         <h4 className="text-lg font-semibold text-white mb-4">Certifications</h4>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            {CERTIFICATIONS.map((cert) => (
-                                <a 
+                            {CERTIFICATIONS.map((cert, idx) => (
+                                <motion.a 
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ delay: idx * 0.1 + 0.2 }}
                                     key={cert.id}
                                     href={cert.link}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-4 p-4 rounded-xl bg-secondary/30 border border-white/5 hover:bg-secondary/50 hover:border-accent/30 transition-all group"
+                                    className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-highlight/50 transition-all group"
                                 >
-                                    <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-xl font-bold text-white group-hover:bg-accent/20 group-hover:text-accent transition-colors">
+                                    <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center text-2xl font-bold text-white group-hover:bg-highlight/20 group-hover:text-highlight transition-colors shadow-inner">
                                         {cert.logo[0]}
                                     </div>
                                     <div>
-                                        <h5 className="font-medium text-white group-hover:text-accent transition-colors line-clamp-1">{cert.title}</h5>
+                                        <h5 className="font-medium text-white group-hover:text-highlight transition-colors line-clamp-1">{cert.title}</h5>
                                         <p className="text-xs text-textMuted">{cert.issuer}</p>
                                     </div>
-                                </a>
+                                </motion.a>
                             ))}
                         </div>
                     </div>
@@ -195,7 +206,7 @@ const About = () => {
                   initial="hidden"
                   animate="visible"
                   exit="exit"
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.4 }}
                 >
                    <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
                     <Code className="text-accent" /> Technical Arsenal
@@ -204,9 +215,12 @@ const About = () => {
                     {SKILLS.map((skill, index) => {
                       const Icon = skill.icon;
                       return (
-                        <div
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: index * 0.05 }}
                           key={index}
-                          className="p-4 bg-secondary/40 rounded-xl border border-white/5 hover:border-accent/30 hover:bg-secondary/60 transition-all group flex flex-col items-center justify-center text-center gap-3"
+                          className="p-4 bg-white/5 rounded-xl border border-white/10 hover:border-accent/50 hover:bg-white/10 transition-all duration-300 group flex flex-col items-center justify-center text-center gap-3 hover:-translate-y-1 hover:shadow-lg"
                         >
                           <Icon className="text-4xl text-textMuted group-hover:text-accent transition-colors duration-300" />
                           <div>
@@ -217,7 +231,7 @@ const About = () => {
                               {skill.level}
                             </p>
                           </div>
-                        </div>
+                        </motion.div>
                       );
                     })}
                   </div>
@@ -231,7 +245,7 @@ const About = () => {
                   initial="hidden"
                   animate="visible"
                   exit="exit"
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.4 }}
                   className="space-y-6"
                 >
                    <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
@@ -262,15 +276,21 @@ const About = () => {
                     ].map((item, idx) => {
                         const Icon = item.icon;
                         return (
-                             <div key={idx} className="flex gap-4 p-4 rounded-xl bg-secondary/40 border border-white/5 hover:border-accent/30 transition-all">
-                                <div className="mt-1 p-2 rounded-lg bg-accent/10 text-accent h-fit">
+                             <motion.div 
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: idx * 0.1 }}
+                                key={idx} 
+                                className="flex gap-4 p-5 rounded-xl bg-white/5 border border-white/10 hover:border-accent/50 hover:bg-white/10 transition-all duration-300 hover:-translate-y-1"
+                             >
+                                <div className="mt-1 p-3 rounded-lg bg-accent/10 text-accent h-fit shadow-inner">
                                     <Icon size={20} />
                                 </div>
                                 <div>
-                                    <h4 className="font-bold text-white mb-1">{item.title}</h4>
+                                    <h4 className="font-bold text-white mb-1 group-hover:text-accent transition-colors">{item.title}</h4>
                                     <p className="text-sm text-textMuted">{item.desc}</p>
                                 </div>
-                             </div>
+                             </motion.div>
                         )
                     })}
                   </div>

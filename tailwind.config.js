@@ -4,12 +4,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#0f172a", // Slate 900 (Deep professional background)
-        secondary: "#1e293b", // Slate 800 (Card background)
-        accent: "#6366f1", // Indigo 500 (Primary Action / Web Dev)
-        highlight: "#14b8a6", // Teal 500 (Data Science / Growth)
-        textMain: "#f8fafc", // Slate 50 (Readable white)
-        textMuted: "#94a3b8", // Slate 400 (Subtitles)
+        primary: "#050505", // Almost black
+        secondary: "#111111", // Very dark gray
+        accent: "#06b6d4", // Cyan 500
+        highlight: "#8b5cf6", // Violet 500
+        textMain: "#ffffff", // Pure white
+        textMuted: "#a1a1aa", // Zinc 400
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
@@ -19,6 +19,7 @@ export default {
         "fade-in": "fadeIn 0.5s ease-out",
         "slide-up": "slideUp 0.5s ease-out",
         scroll: "scroll 20s linear infinite",
+        blob: "blob 7s infinite",
       },
       keyframes: {
         fadeIn: {
@@ -32,6 +33,15 @@ export default {
         scroll: {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-50%)" },
+        },
+        blob: {
+          "0%": { transform: "translate(0px, 0px) scale(1)" },
+          "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+          "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+          "100%": { transform: "translate(0px, 0px) scale(1)" },
+        },
+        shimmer: {
+          "100%": { transform: "translateX(100%)" },
         },
       },
     },
