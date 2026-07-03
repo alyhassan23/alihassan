@@ -1,5 +1,6 @@
 import React from "react";
 import { Mail, MapPin, Phone, Linkedin } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Contact = () => {
   const containerVariants = {
