@@ -70,7 +70,7 @@ const Contact = () => {
               <div className="overflow-hidden">
                 <h3 className="text-white font-bold text-base mb-1">Email</h3>
                 <p className="text-textMuted text-sm truncate">
-                  alih.bsse@gmail.com
+                  alih.b@gmail.com
                 </p>
               </div>
             </div>
